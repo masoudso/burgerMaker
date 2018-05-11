@@ -26,9 +26,9 @@ const burger = (props) => {/* 1 */
 export default burger;
 /* 1:  A Short note:
    Object.Keys receives the ingredients as an object and returns the keys (here 
-   they are Salad, Meat, ..., then the function makes a new array using spread
+   they are Salad, Meat, ...), then the function makes a new array using spread
     operator for each key with size of each key (number of meat, cheese, etc)
-    and again maps it using index and a unique key.)
+    and again maps it using index and a unique key.
    2: Reduce function takes arr as the array and curr as the current element
       and applies the function (here concat) on each element and puts it in arr.
    3: The transformedIngredients is now reduced (has a size)

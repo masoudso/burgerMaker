@@ -38,15 +38,39 @@ class BurgerBuilder extends Component{
     }
 
     removeIngredientHandler = (type) => {
-
+        const prevCount = this.state.ingredients[type];
+        if (prevCount === 0){
+            return;
+        }
+        const updatedCount = prevCount - 1;
+        const updatedIngredients = {...this.state.ingredients};
+        updatedIngredients[type] = updatedCount;
+        const priceToBeReduced = INGREDIENTS_PRICE[type];
+        const oldPrice = this.state.totalPrice;
+        const newPrice = oldPrice - priceToBeReduced;
+        this.setState({
+            ingredients : updatedIngredients,
+            totalPrice : newPrice
+        })
     }
 
     render(){
+        const infoDisabled = {
+            ...this.state.ingredients
+        }
+
+        for (let key in infoDisabled){/* 1 & 2*/
+            infoDisabled[key] = infoDisabled[key] <= 0
+        }
+
         return(
             <Aux>
                 <Burger ingredients={this.state.ingredients}/>
                 <div> 
-                    <BuildControls />
+                    <BuildControls 
+                    ingredientsAdded = {this.addIngredientHandler}
+                    ingredientsRemoved = {this.removeIngredientHandler}
+                    disabled = {infoDisabled}/>
                 </div>
             </Aux>
         )
@@ -54,3 +78,7 @@ class BurgerBuilder extends Component{
 };
 
 export default BurgerBuilder;
+/* 
+1: 'let in' loops through each element and key in here is the key index (meat, ...)
+2: if infoDisabled[key] is less than equal to 0 then infoDisabled[key] will be true
+*/
