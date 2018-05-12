@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Aux from '../../hoc/Aux'
-import Burger from '../../Components/Burger/Burger';
+import Burger from '../../Components/Burger/Burger'
 import BuildControls from '../../Components/Burger/BuildControls/BuildControls'
+import Modal from '../../Components/UI/Modal/Modal'
+import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENTS_PRICE = {
     salad : 1,
@@ -18,7 +20,17 @@ class BurgerBuilder extends Component{
             cheese: 0,
             meat: 0
         },
-        totalPrice : 1
+        totalPrice : 1,
+        purchasable : false
+    }
+
+    updatePurchaseState (ingredients) {
+        const sum = Object.keys(ingredients).map(igKey => {
+            return ingredients[igKey]
+        }).reduce((sum , el) => {return sum + el}, 0);
+        this.setState({
+            purchasable : sum >= 1            /* 3 */
+        })
     }
 
     addIngredientHandler = (type) => {
@@ -35,6 +47,7 @@ class BurgerBuilder extends Component{
             ingredients : updatedIngredients,
             totalPrice : newPrice
         })
+        this.updatePurchaseState(updatedIngredients);
     }
 
     removeIngredientHandler = (type) => {
@@ -52,6 +65,7 @@ class BurgerBuilder extends Component{
             ingredients : updatedIngredients,
             totalPrice : newPrice
         })
+        this.updatePurchaseState(updatedIngredients);
     }
 
     render(){
@@ -65,11 +79,13 @@ class BurgerBuilder extends Component{
 
         return(
             <Aux>
+                <Modal><OrderSummary ingredients={this.state.ingredients}/></Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <div> 
                     <BuildControls 
                     ingredientsAdded = {this.addIngredientHandler}
                     ingredientsRemoved = {this.removeIngredientHandler}
+                    purchasable = {this.state.purchasable}
                     disabled = {infoDisabled}
                     price = {this.state.totalPrice}/>
                 </div>
@@ -82,4 +98,5 @@ export default BurgerBuilder;
 /* 
 1: 'let in' loops through each element and key in here is the key index (meat, ...)
 2: if infoDisabled[key] is less than equal to 0 then infoDisabled[key] will be true
+3: if sum > 1 set purchasable to true
 */
