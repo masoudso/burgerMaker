@@ -8,6 +8,8 @@
     font-size: 1.2rem; 
 }
 
+/*Quick note on media: when min is defined, once the size of
+screen goes below min, it will look for the next min to adjust itself to. */
 @media (min-width: 500px) and (min-height: 400px){
     .Burger {
         width: 350px;
@@ -34,5 +36,21 @@
     .Burger {
         width: 700px;
         height: 600px;
+    }
+}
+
+@media (min-width: 1570px) and (min-height: 910px){
+    /* for my 27 inch*/
+    .Burger {
+        width: 500px;
+        height: 550px;
+    }
+}
+
+@media (min-width: 900px) and (min-height: 900px){
+    /* for my 27 inch right side!*/
+    .Burger {
+        width: 500px;
+        height: 540px;
     }
 }

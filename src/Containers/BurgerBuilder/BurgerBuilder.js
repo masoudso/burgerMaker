@@ -6,7 +6,7 @@ import Modal from '../../Components/UI/Modal/Modal'
 import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENTS_PRICE = {
-    salad : 1,
+    lettuce : 1,
     meat : 1.7,
     bacon : 1.3,
     cheese : 0.7
@@ -15,9 +15,9 @@ const INGREDIENTS_PRICE = {
 class BurgerBuilder extends Component{
     state = {
         ingredients : {
-            salad : 0,
-            bacon: 0,
+            lettuce : 0,
             cheese: 0,
+            bacon: 0,
             meat: 0
         },
         totalPrice : 1,
@@ -74,10 +74,15 @@ class BurgerBuilder extends Component{
             purchasing : true
         });
     }
+    
     purchaseCancelHandler = () => {
         this.setState({
             purchasing : false
         })
+    }
+
+    purchaseContinueHandler = () => {
+        alert("Let's proceed!");
     }
 
     render(){
@@ -92,7 +97,10 @@ class BurgerBuilder extends Component{
         return(
             <Aux>
                 <Modal show={this.state.purchasing} closeModal={this.purchaseCancelHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary ingredients={this.state.ingredients}
+                        price={this.state.totalPrice}
+                        continueClicked={this.purchaseContinueHandler}
+                        cancelClicked={this.purchaseCancelHandler} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <div> 
