@@ -6,7 +6,7 @@ import BackDrop from '../BackDrop/BackDrop'
 class Modal extends Component {
     /* 1 */
     shouldComponentUpdate(nextProps, nextState){
-        return nextProps.show !== this.props.show
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
     }
     componentWillUpdate(){
         console.log('[Modal] WillUpdate');
