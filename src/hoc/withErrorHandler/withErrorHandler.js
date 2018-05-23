@@ -8,14 +8,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error : null
         }
 
-        componentWillMount(){
-            axios.interceptors.request.use(req => {
+        componentWillMount(){ /* 2 & 3*/
+            this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({error : null})
                 return req;
             })
-            axios.interceptors.response.use(res => res, error => {
+            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
                 this.setState({error : error})
             })
+        }
+
+        componentWillUnmount(){ /* 4 */ 
+            axios.interceptors.request.eject(this.reqInterceptor)
+            axios.interceptors.request.eject(this.resInterceptor)
         }
 
         errorConfirmedHandler = () => {
@@ -38,4 +43,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
 }
 
 export default withErrorHandler;
-/* 1 This class is named "class" because its only returned in here */
+/* 1) This class is named "class" because its only returned in here 
+   2 & 3) reqInterceptor (RequestInterceptor) and resInterceptor could be any other names. 
+    they are being used as references.
+   4) to avoid error as the applications becomes larger, we need to have unmount.
+    look for docs. It is to remove interceptors and to remove memory leaks.
+*/
