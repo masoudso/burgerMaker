@@ -6,6 +6,7 @@ import Modal from '../../Components/UI/Modal/Modal'
 import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 import Spinner from '../../Components/UI/Spinner/Spinner'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler' /* 4 */
 
 const INGREDIENTS_PRICE = {
     lettuce : 1,
@@ -144,9 +145,10 @@ class BurgerBuilder extends Component{
     };
 };
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);
 /* 
 1: 'let in' loops through each element and key in here is the key index (meat, ...)
 2: if infoDisabled[key] is less than equal to 0 then infoDisabled[key] will be true
 3: if sum > 1 set purchasable to true
+4: it's lower case because we're not using it in JSX
 */
