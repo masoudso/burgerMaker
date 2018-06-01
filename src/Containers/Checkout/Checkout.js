@@ -3,10 +3,12 @@ import CheckoutSummary from '../../Components/Order/CheckoutSummary/CheckoutSumm
 
 export default class Checkout extends Component {
     state = {
+        ingredients: {
         lettuce : 1,
         meat: 1,
-        bacon: 1,
-        cheese: 1
+        cheese: 1,
+        bacon: 1
+        }
     }
     render(){
         return(
