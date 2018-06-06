@@ -119,7 +119,19 @@ class BurgerBuilder extends Component {
 
         //using the 'history' object available by routing 
         //we can push this page into the stack when triggering the function above
-        this.props.history.push('/checkout');
+
+        //sec12Lec211
+        const queryParams = []
+        for (let i in this.state.ingredients){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));            
+        }
+
+        const queryString = queryParams.join('&');
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
 
