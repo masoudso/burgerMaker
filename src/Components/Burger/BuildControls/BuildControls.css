@@ -49,3 +49,9 @@
         transform: scale(1);
     }
 }
+
+@media (min-width : 900px) and (min-height : 600px){
+.BuildControls{
+    height : 280px;
+}
+}
