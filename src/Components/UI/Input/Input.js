@@ -46,7 +46,8 @@ const input = (props) => {
 
     let validationMessage = null
     if (props.invalid && props.touched){
-        validationMessage = <p className={classes.validationError}>Please enter a valid {props.elementType}</p>
+        validationMessage = <p className={classes.validationError}>
+        Please enter a valid {props.elementConfig.type}</p>
     }
 
     return (
