@@ -1,3 +1,7 @@
 //where I export everything
 
-export {addIngredient, removeIngredient} from './burgerBuilder'
+export {
+    addIngredient,
+    removeIngredient,
+    initIngridients
+} from './burgerBuilder'
