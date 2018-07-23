@@ -86,7 +86,7 @@ class Auth extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.control.email.value, this.state.control.password.value)        
+        this.props.onAuth(this.state.control.email.value, this.state.control.password.value, this.state.isSignUp)        
     }
 
     switchAuthMode = () => {
@@ -134,7 +134,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
+        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
     }
 }
 
